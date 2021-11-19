@@ -3,3 +3,4 @@ datasets/*
 checkpoints/*
 *png
 *.pyc
+*.pth
