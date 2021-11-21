@@ -14,22 +14,10 @@ device = torch.device('cuda')
 
 resnet_model = resnet_model.to(device)
 num_ftrs = resnet_model.fc.in_features
-# print(f'Last FC layer of ResNet-18: {resnet_model.fc}')
-# print(f'Output layer dim for ImageNet: {resnet_model.fc.out_features}')
-# print(f'Trainable ResNet-18 params before freezing all layers: {sum(p.numel() for p in resnet_model.parameters() if p.requires_grad)}')
-# for param in resnet_model.parameters():
-#     param.requires_grad = False
-# print(f'Trainable params after freezing all layers: {sum(p.numel() for p in resnet_model.parameters() if p.requires_grad)}')
+
 resnet_model.fc = nn.Linear(num_ftrs, 31)
-# print(f'Trainable params after changing last FC layer: {sum(p.numel() for p in resnet_model.parameters() if p.requires_grad)}')
-# print(f'Last FC layer (changed for CIFAR-10): {resnet_model.fc}')
-# print(f'Output layer dim for CIFAR-10: {resnet_model.fc.out_features}')
-# print(resnet_model)
 
 resnet_model = resnet_model.to(device)
-# test_losses = []
-# test(resnet_model, 1, testloader, if_resnet=True)
-# print(f'As the last layer is not trained, we can see the accuracy of randomly picking a class. \ni.e. 100/#classes : ~10%')
 
 def train(classifier, epoch, train_loader, if_resnet=False, verbose = True, show_less = False):
 
@@ -90,8 +78,8 @@ train_dataloader, test_dataloader = {}, {}
 for domain in ['amazon', 'dslr', 'webcam']:
     train_dataloader[domain], test_dataloader[domain] = get_train_test_loaders(folder_path='datasets/office31', batch_size=32, domain = domain, transforms=transforms)
 
-train_domain = 'amazon'
-max_epoch = 10
+train_domain = 'webcam'
+max_epoch = 5
 train_losses = []
 train_counter = []
 test_losses = []
