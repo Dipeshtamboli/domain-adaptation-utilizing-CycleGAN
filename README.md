@@ -12,9 +12,37 @@ The Office dataset contains 31 object categories in three domains: Amazon, DSLR 
 
 ![office-31-dataset](images_and_plots/office31_sample.jpeg)
 
+
+![office-31-sample-count](graph_image_count_complete_office31.jpg)
+
+
 - Office dataset homepage: https://www.cc.gatech.edu/~judy/domainadapt/           
 - Office-31 dataset download link: https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA
 
-Run `$python office31_data_split.py` to download Office-31 dataset and split it for the CycleGAN experiment and Domain Adaptation experiment.
-
 ## Running Experiments
+
+1) Setting up the environment
+- `pip install -r requirements.txt` for installing all the required libraries to run this project
+- `bash cyclegan_dataset_download.sh` to download all the required datasets for reproducing CycleGAN's results
+- `python office31_data_split.py` to download Office-31 dataset and split it for the CycleGAN experiment and Domain Adaptation experiment.
+
+
+2) Reproducing CycleGAN paper's results   
+After downloading the datasets, set `dataset_name` for the dataset you eant to train CycleGAN model on.  
+Training the CycleGAN model:
+- `python train.py --dataroot ./datasets/{dataset_name} --name {experiment_name} --model cycle_gan`   
+
+    Testing:   
+- `python test.py --dataroot ./datasets/{dataset_name} --name {experiment_name} --model cycle_gan`
+
+
+3) Implementing CycleGAN Office-31 dataset
+After downloading Office-31 dataset and restructuring it for the training, run
+- `bash train_bash.py` to convert Office-31 domains in set A and set B (that's how CycleGAN datasets are specifeid) and to train it
+4) Training Resnet-18 on Office-31 dataset  
+- `python train_office.py` for training and saving the model weights
+5) Plotting TSNE to show domain-shift 
+- `python extract_features.py` to extract the Office-31 features and save it in the `npy` format.
+- `python plot_tsne.py` to plot TSNE graph of features to show the domain-shift
+
+
