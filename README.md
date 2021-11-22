@@ -15,4 +15,6 @@ The Office dataset contains 31 object categories in three domains: Amazon, DSLR 
 - Office dataset homepage: https://www.cc.gatech.edu/~judy/domainadapt/           
 - Office-31 dataset download link: https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA
 
+Run `$python office31_data_split.py` to download Office-31 dataset and split it for the CycleGAN experiment and Domain Adaptation experiment.
+
 ## Running Experiments
