@@ -10,15 +10,14 @@ print("Downloading office-31 dataset from the official source")
 url = "https://drive.google.com/u/0/uc?export=download&confirm=ogBi&id=0B4IapRTv9pJ1WGZVd1VDMmhwdlE"
 dir_to_download = "datasets/office31/"
 filename = f"{dir_to_download}office31_dataset.tar.gz"
-# if not os.path.exists(dir_to_download): os.makedirs(dir_to_download)
 mkdir_func(dir_to_download)
-# gdown.download(url, filename, quiet = False)
+gdown.download(url, filename, quiet = False)
 print(f"File {filename} is downloaded.")
 
 os.chdir(dir_to_download)
 print(f"Current working directory: {os.getcwd()}")
 print(f"Unpacking {filename.split('/')[-1]}")
-# os.system("tar -xf office31_dataset.tar.gz")
+os.system("tar -xf office31_dataset.tar.gz")
 
 all_imgs = glob.glob('*/*/*/*.jpg')
 os.chdir("../")
